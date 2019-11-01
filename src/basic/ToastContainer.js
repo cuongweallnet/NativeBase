@@ -1,9 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Keyboard, Platform, Animated, ViewPropTypes } from 'react-native';
+import { Keyboard, Platform, Animated, ViewPropTypes, View } from 'react-native';
 import { connectStyle } from 'native-base-shoutem-theme';
-
 import mapPropsToStyleNames from '../utils/mapPropsToStyleNames';
 import { PLATFORM } from '../theme/variables/commonColor';
 
@@ -108,7 +107,8 @@ class ToastContainer extends Component {
       buttonTextStyle: config.buttonTextStyle,
       buttonStyle: config.buttonStyle,
       textStyle: config.textStyle,
-      onClose: config.onClose
+      onClose: config.onClose,
+      customView: config.customView
     });
     // If we have a toast already open, cut off its close timeout so that it won't affect *this* toast.
     if (this.closeTimeout) {
@@ -149,24 +149,30 @@ class ToastContainer extends Component {
     if (this.state.modalVisible) {
       return (
         <Animated.View style={this.getToastStyle()}>
-          <Toast
-            style={this.state.style}
-            danger={this.state.type === 'danger'}
-            success={this.state.type === 'success'}
-            warning={this.state.type === 'warning'}
-          >
-            <Text style={this.state.textStyle}>{this.state.text}</Text>
-            {this.state.buttonText && (
-              <Button
-                style={this.state.buttonStyle}
-                onPress={() => this.closeToast('user')}
+          {
+            this.state.customView ? (
+                this.state.customView
+            ) : (
+              <Toast
+                style={this.state.style}
+                danger={this.state.type === 'danger'}
+                success={this.state.type === 'success'}
+                warning={this.state.type === 'warning'}
               >
-                <Text style={this.state.buttonTextStyle}>
-                  {this.state.buttonText}
-                </Text>
-              </Button>
-            )}
-          </Toast>
+                <Text style={this.state.textStyle}>{this.state.text}</Text>
+                {this.state.buttonText && (
+                  <Button
+                    style={this.state.buttonStyle}
+                    onPress={() => this.closeToast('user')}
+                  >
+                    <Text style={this.state.buttonTextStyle}>
+                      {this.state.buttonText}
+                    </Text>
+                  </Button>
+                )}
+              </Toast>
+            )
+          }
         </Animated.View>
       );
     }
