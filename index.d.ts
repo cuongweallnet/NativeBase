@@ -1194,7 +1194,7 @@ declare module "native-base" {
 			textStyle?: RnTextStyleProp;
 			buttonTextStyle?: RnTextStyleProp;
 			buttonStyle?: RnViewStyleProp;
-			customText?: () => any;
+			customView?: () => any;
 		}): void;
 
 		/**
