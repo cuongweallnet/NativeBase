@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Keyboard, Platform, Animated, ViewPropTypes, View } from 'react-native';
+import { Platform, Animated, ViewPropTypes } from 'react-native';
 import { connectStyle } from 'native-base-shoutem-theme';
 import mapPropsToStyleNames from '../utils/mapPropsToStyleNames';
 import { PLATFORM } from '../theme/variables/commonColor';
@@ -31,18 +31,8 @@ class ToastContainer extends Component {
 
     this.state = {
       fadeAnim: new Animated.Value(0),
-      keyboardHeight: 0,
-      isKeyboardVisible: false,
       modalVisible: false
-    };
-
-    this.keyboardDidHide = this.keyboardDidHide.bind(this);
-    this.keyboardDidShow = this.keyboardDidShow.bind(this);
-  }
-
-  componentDidMount() {
-    Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
-    Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+    }
   }
 
   getToastStyle() {
@@ -60,9 +50,6 @@ class ToastContainer extends Component {
 
   getTop() {
     if (Platform.OS === PLATFORM.IOS) {
-      if (this.state.isKeyboardVisible) {
-        return this.state.keyboardHeight;
-      }
       return 30;
     }
     return 0;
@@ -79,20 +66,6 @@ class ToastContainer extends Component {
   }
   getModalState() {
     return this.state.modalVisible;
-  }
-
-  keyboardDidHide() {
-    this.setState({
-      keyboardHeight: 0,
-      isKeyboardVisible: false
-    });
-  }
-
-  keyboardDidShow(e) {
-    this.setState({
-      keyboardHeight: e.endCoordinates.height,
-      isKeyboardVisible: true
-    });
   }
 
   showToast({ config }) {
