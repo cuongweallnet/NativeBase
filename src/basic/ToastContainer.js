@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Platform, Animated, ViewPropTypes } from 'react-native';
+import { Platform, Animated, ViewPropTypes, Dimensions } from 'react-native';
 import { connectStyle } from 'native-base-shoutem-theme';
 import mapPropsToStyleNames from '../utils/mapPropsToStyleNames';
 import { PLATFORM } from '../theme/variables/commonColor';
@@ -10,10 +10,13 @@ import { Text } from './Text';
 import { Button } from './Button';
 import { Toast } from './Toast';
 
+const TOP_CENTER = (Dimensions.get("window").height / 2) - 50;
+
 const POSITION = {
   ABSOLUTE: 'absolute',
   BOTTOM: 'bottom',
-  TOP: 'top'
+  TOP: 'top',
+  CENTER: 'center'
 };
 
 class ToastContainer extends Component {
@@ -42,7 +45,7 @@ class ToastContainer extends Component {
       width: '100%',
       elevation: 9,
       paddingHorizontal: Platform.OS === PLATFORM.IOS ? 20 : 0,
-      top: this.state.position === POSITION.TOP ? 30 : undefined,
+      top: this.state.position === POSITION.TOP ? 30 : (this.state.position === POSITION.CENTER ? TOP_CENTER :  undefined),
       bottom:
         this.state.position === POSITION.BOTTOM ? this.getTop() : undefined
     };
