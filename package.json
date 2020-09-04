@@ -45,7 +45,6 @@
     "react-native-drawer": "2.5.1",
     "react-native-easy-grid": "0.2.2",
     "react-native-keyboard-aware-scroll-view": "0.9.1",
-    "react-native-vector-icons": "^7.0.0",
     "react-timer-mixin": "^0.13.4",
     "react-tween-state": "^0.1.5",
     "tween-functions": "^1.0.1"
@@ -78,7 +77,8 @@
   "optionalDependencies": {},
   "peerDependencies": {
     "react": ">=16.4.1",
-    "react-native": ">=0.56.0"
+    "react-native": ">=0.56.0",
+    "react-native-vector-icons": "^7.0.0"
   },
   "husky": {
     "hooks": {
