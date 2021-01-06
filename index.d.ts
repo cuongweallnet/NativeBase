@@ -1205,6 +1205,7 @@ declare module "native-base" {
 			buttonTextStyle?: RnTextStyleProp;
 			buttonStyle?: RnViewStyleProp;
 			swipeDisabled?: boolean;
+			customText?: () => any;
 		}): void;
 
 		/**
